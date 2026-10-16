@@ -1,0 +1,7 @@
+fix: 修复 StaffArchiveController 编译错误
+
+- 删除重复声明的 userMapper 字段（第52-53行）
+- 补上缺失的 examMapper 字段注入
+- 将不存在的 userMapper.selectDeptName()/selectPositionName()
+  替换为 SysDepartmentService/SysPositionService.getById()
+- 修复残缺的 JavaDoc 注释

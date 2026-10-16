@@ -1,6 +1,5 @@
 package com.gmp.controller;
 
-import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gmp.common.BusinessException;
@@ -68,18 +67,20 @@ public class StaffArchiveController {
     @GetMapping("/{userId}/overview")
     @ApiOperation("员工档案概览")
     public Result<ArchiveOverviewVO> overview(@PathVariable Long userId) {
+        // 1. 查员工基础信息，不存在则 404
         SysUser user = userMapper.selectById(userId);
         if (user == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND, "员工不存在");
         }
 
+        // 2. 组装概览 VO 基础字段
         ArchiveOverviewVO vo = new ArchiveOverviewVO();
         vo.setUserId(user.getId());
         vo.setRealName(user.getRealName());
         vo.setUsername(user.getUsername());
         vo.setLastLoginTime(user.getLastLoginTime());
 
-        // 部门 / 岗位名称（通过 Service 查询，避免 XML 改造）
+        // 3. 通过 Service 查询部门 / 岗位名称（避免在 Controller 直接写 XML 或硬编码 Mapper 方法）
         if (user.getDepartmentId() != null) {
             SysDepartment dept = departmentService.getById(user.getDepartmentId());
             if (dept != null) {
@@ -93,18 +94,18 @@ public class StaffArchiveController {
             }
         }
 
-        // 学习记录统计
+        // 4. 学习记录聚合统计
         Long studyCount = studyMapper.selectCount(new LambdaQueryWrapper<TrVideoStudyRecord>()
                 .eq(TrVideoStudyRecord::getUserId, userId));
         vo.setStudyRecordCount(studyCount);
-        // 累计学习时长（秒转小时，保留1位）
+        // 累计学习时长（秒转小时，保留 1 位小数）
         Integer totalSeconds = studyMapper.selectTotalStudyDuration(userId);
         long safeSeconds = totalSeconds == null ? 0 : totalSeconds;
         BigDecimal hours = BigDecimal.valueOf(safeSeconds)
                 .divide(BigDecimal.valueOf(3600), 1, RoundingMode.HALF_UP);
         vo.setTotalStudyHours(hours);
 
-        // 考试统计（排除进行中的）
+        // 5. 考试聚合统计（排除进行中的 status=0）
         Long examCount = examMapper.selectCount(new LambdaQueryWrapper<TrExamRecord>()
                 .eq(TrExamRecord::getUserId, userId)
                 .ne(TrExamRecord::getStatus, 0));
@@ -117,7 +118,7 @@ public class StaffArchiveController {
         Integer avg = examMapper.selectAvgPassScore(userId);
         vo.setAvgPassScore(avg == null ? null : BigDecimal.valueOf(avg));
 
-        // 证书统计（调用同一套 Service 逻辑保证状态计算一致）
+        // 6. 证书统计（调用 StudyService.certificates(userId) 保证状态计算与学员端一致）
         List<CertificateVO> certs = studyService.certificates(userId);
         long valid = certs.stream().filter(c -> "valid".equals(c.getStatus())).count();
         long expiring = certs.stream().filter(c -> "expiring".equals(c.getStatus())).count();
