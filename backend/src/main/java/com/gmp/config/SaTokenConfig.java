@@ -129,6 +129,16 @@ public class SaTokenConfig implements WebMvcConfigurer {
             SaRouter.match("/training/course-pdfs", "/training/course-pdfs/**")
                     .check(r -> StpUtil.checkRoleOr("SUPER_ADMIN", "QA_MANAGER", "TRAINING_ADMIN"));
 
+            // 课程分类管理：GET（下拉选项 + 分页查询）对所有登录用户开放，
+            // POST/PUT/DELETE 写操作仅限管理员角色维护
+            SaRouter.match("/training/course-categories", "/training/course-categories/**")
+                    .matchMethod("POST", "PUT", "DELETE")
+                    .check(r -> StpUtil.checkRoleOr("SUPER_ADMIN", "QA_MANAGER", "TRAINING_ADMIN"));
+
+            // 员工培训档案（管理员视角）：四类管理员均可查看
+            SaRouter.match("/system/archive", "/system/archive/**")
+                    .check(r -> StpUtil.checkRoleOr("SUPER_ADMIN", "QA_MANAGER", "TRAINING_ADMIN", "DEPT_LEADER"));
+
             // 考试管理 - 题库 / 试卷，仅管理员角色可维护与管理
             SaRouter.match("/exam/**", r -> StpUtil.checkRoleOr("SUPER_ADMIN", "QA_MANAGER", "TRAINING_ADMIN"));
 

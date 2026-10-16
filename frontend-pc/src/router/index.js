@@ -158,6 +158,12 @@ const routes = [
         meta: { title: '课程管理', icon: 'Notebook', roles: ROLE_GROUPS.TRAINING }
       },
       {
+        path: 'category',
+        name: 'TrainingCategory',
+        component: () => import('@/views/training/category/index.vue'),
+        meta: { title: '课程分类', icon: 'FolderOpened', roles: ROLE_GROUPS.TRAINING }
+      },
+      {
         path: 'video',
         name: 'TrainingVideo',
         component: () => import('@/views/training/video/index.vue'),
