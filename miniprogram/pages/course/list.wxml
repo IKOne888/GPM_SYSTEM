@@ -1,0 +1,60 @@
+<!--pages/course/list.wxml - 课程中心-->
+<view class="page-course-list">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <input
+        class="search-input"
+        placeholder="搜索课程名称"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+  </view>
+
+  <!-- 报名状态筛选 -->
+  <view class="filter-bar">
+    <view class="filter-item {{enrolledFilter === '' ? 'active' : ''}}" data-value="" bindtap="onFilterTap">全部课程</view>
+    <view class="filter-item {{enrolledFilter === 'false' ? 'active' : ''}}" data-value="false" bindtap="onFilterTap">未报名</view>
+    <view class="filter-item {{enrolledFilter === 'true' ? 'active' : ''}}" data-value="true" bindtap="onFilterTap">已报名</view>
+  </view>
+
+  <!-- 课程列表 -->
+  <view class="course-list container">
+    <block wx:if="{{courseList.length > 0}}">
+      <view
+        wx:for="{{courseList}}"
+        wx:key="id"
+        class="course-card card"
+        data-id="{{item.id}}"
+        bindtap="onCourseTap"
+      >
+        <view class="course-head flex-between">
+          <text class="course-name ellipsis">{{item.name}}</text>
+          <text class="tag {{item.enrolled ? 'tag-done' : 'tag-pending'}}">{{item.enrolled ? '已报名' : '未报名'}}</text>
+        </view>
+        <view class="course-meta">
+          <text class="meta-chip" wx:if="{{item.categoryName}}">{{item.categoryName}}</text>
+          <text class="meta-chip" wx:if="{{item.trainingHours}}">{{item.trainingHours}}学时</text>
+          <text class="meta-chip" wx:if="{{item.passScore}}">及格{{item.passScore}}分</text>
+        </view>
+        <view class="course-code" wx:if="{{item.sopCode}}">
+          <text>SOP：{{item.sopCode}} {{item.sopVersion || ''}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && courseList.length === 0}}">
+      <text class="empty-text">暂无课程</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{!hasMore && courseList.length > 0}}">
+      <text class="loading-text">没有更多了</text>
+    </view>
+  </view>
+</view>

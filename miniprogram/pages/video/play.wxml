@@ -1,0 +1,120 @@
+<!--pages/video/play.wxml - 视频播放页-->
+<view class="page-video-play">
+  <!-- 视频播放器 -->
+  <view class="video-container" bindtouchstart="onVideoTouch" bindtouchmove="onVideoTouch">
+    <video
+      id="myVideo"
+      class="video-player"
+      src="{{videoUrl}}"
+      poster="{{videoInfo.poster || ''}}"
+      controls="{{true}}"
+      show-center-play-btn="{{true}}"
+      show-play-btn="{{true}}"
+      show-fullscreen-btn="{{true}}"
+      enable-progress-gesture="{{true}}"
+      playback-rate="{{playbackRate}}"
+      bindplay="onVideoPlay"
+      bindpause="onVideoPause"
+      bindended="onVideoEnded"
+      bindtimeupdate="onTimeUpdate"
+      bindloadedmetadata="onVideoLoaded"
+      object-fit="contain"
+      autoplay="{{false}}"
+    ></video>
+  </view>
+
+  <!-- 播放控制栏 -->
+  <view class="control-bar">
+    <!-- 进度信息 -->
+    <view class="progress-info">
+      <text class="time-text">{{currentTimeText}}</text>
+      <slider
+        class="progress-slider"
+        min="0"
+        max="100"
+        value="{{progressPercent}}"
+        activeColor="#1890ff"
+        backgroundColor="#e0e0e0"
+        block-size="16"
+        bindchange="onSliderChange"
+      />
+      <text class="time-text">{{durationText}}</text>
+    </view>
+
+    <!-- 控制按钮 -->
+    <view class="control-btns flex-between">
+      <view class="control-left flex">
+        <!-- 倍速按钮 -->
+        <view class="speed-btn" bindtap="onSpeedTap">
+          <text class="speed-text">{{playbackRate}}x</text>
+        </view>
+        <!-- 倍速选择器 -->
+        <view class="speed-picker" wx:if="{{showSpeedPicker}}">
+          <view
+            wx:for="{{speedOptions}}"
+            wx:key="*this"
+            class="speed-option {{speedIndex === index ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onSpeedSelect"
+          >
+            {{item}}x
+          </view>
+        </view>
+      </view>
+
+      <view class="control-right flex">
+        <!-- 播放列表 -->
+        <view class="playlist-btn" bindtap="togglePlaylist">
+          <text>列表</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 视频信息 -->
+  <view class="video-info-bar" wx:if="{{videoInfo}}">
+    <text class="video-title ellipsis">{{videoInfo.name}}</text>
+    <text class="video-study-info">已学习 {{studyDurationText}}</text>
+  </view>
+
+  <!-- 播放列表面板 -->
+  <view class="playlist-panel {{showPlaylist ? 'show' : ''}}">
+    <view class="playlist-header flex-between">
+      <text class="playlist-title">视频列表 ({{videoList.length}})</text>
+      <view class="playlist-close" bindtap="togglePlaylist">&#x2716;</view>
+    </view>
+    <scroll-view class="playlist-scroll" scroll-y>
+      <view
+        wx:for="{{videoList}}"
+        wx:key="id"
+        class="playlist-item {{currentVideoIndex === index ? 'active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onVideoItemTap"
+      >
+        <view class="pl-index">{{index + 1}}</view>
+        <view class="pl-info flex-1">
+          <text class="pl-name ellipsis">{{item.name}}</text>
+          <text class="pl-duration">{{item.durationText}}</text>
+        </view>
+        <view class="pl-status" wx:if="{{currentVideoIndex === index}}">
+          <text class="playing-icon" wx:if="{{isPlaying}}">&#x25B6; 播放中</text>
+          <text class="playing-icon" wx:else>&#x23F8; 已暂停</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 遮罩层 -->
+  <view class="mask" wx:if="{{showPlaylist || showSpeedPicker}}" bindtap="togglePlaylist"></view>
+
+  <!-- 防挂机弹窗 -->
+  <view class="anti-idle-mask" wx:if="{{showAntiIdle}}">
+    <view class="anti-idle-dialog">
+      <view class="anti-idle-title">检测到您可能离开了</view>
+      <view class="anti-idle-desc">为了保证学习效果，请确认您仍在观看</view>
+      <button class="btn-primary anti-idle-btn" bindtap="onAntiIdleConfirm">
+        我仍在观看，继续播放
+      </button>
+    </view>
+  </view>
+</view>

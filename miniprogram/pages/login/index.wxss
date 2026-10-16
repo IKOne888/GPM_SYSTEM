@@ -1,0 +1,158 @@
+/* pages/login/index.wxss */
+
+.page-login {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1890ff 0%, #e6f7ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 60rpx;
+}
+
+/* 头部 */
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140rpx;
+  padding-bottom: 60rpx;
+}
+
+.logo-wrap {
+  margin-bottom: 30rpx;
+}
+
+.logo-icon {
+  width: 140rpx;
+  height: 140rpx;
+  background: #fff;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #1890ff;
+  box-shadow: 0 8rpx 30rpx rgba(24, 144, 255, 0.3);
+}
+
+.app-title {
+  color: #fff;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+}
+
+/* 表单 */
+.login-form {
+  width: 100%;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 50rpx 40rpx;
+  box-shadow: 0 8rpx 40rpx rgba(0, 0, 0, 0.08);
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #f0f0f0;
+  padding: 20rpx 0;
+  margin-bottom: 10rpx;
+}
+
+.form-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  width: 50rpx;
+  text-align: center;
+}
+
+.form-input {
+  flex: 1;
+  font-size: 30rpx;
+  height: 60rpx;
+}
+
+/* 验证码图片 */
+.captcha-img {
+  width: 180rpx;
+  height: 64rpx;
+  margin-left: 20rpx;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.form-options {
+  padding: 20rpx 0 30rpx;
+}
+
+.remember-pwd {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.checkbox {
+  width: 32rpx;
+  height: 32rpx;
+  border: 2rpx solid #d9d9d9;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+}
+
+.checkbox.checked {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+/* 登录按钮 */
+.login-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+  margin-top: 20rpx;
+}
+
+.wx-login-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #fff;
+  border: 2rpx solid #1890ff;
+  color: #1890ff;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  margin-top: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wx-login-btn::after {
+  border: none;
+}
+
+.wx-icon {
+  margin-right: 10rpx;
+  font-size: 36rpx;
+}
+
+/* 底部 */
+.login-footer {
+  position: fixed;
+  bottom: 60rpx;
+}
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24rpx;
+}

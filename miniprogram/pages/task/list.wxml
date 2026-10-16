@@ -1,0 +1,76 @@
+<!--pages/task/list.wxml - 全部任务列表-->
+<view class="page-task-list">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <input
+        class="search-input"
+        placeholder="搜索课程/任务名称"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="filter-bar">
+    <view
+      wx:for="{{statusOptions}}"
+      wx:key="value"
+      class="filter-item {{statusFilter === item.value ? 'active' : ''}}"
+      data-value="{{item.value}}"
+      bindtap="onFilterTap"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 任务列表 -->
+  <view class="task-list container">
+    <block wx:if="{{taskList.length > 0}}">
+      <view
+        wx:for="{{taskList}}"
+        wx:key="id"
+        class="task-card card"
+        data-id="{{item.id}}"
+        bindtap="onTaskTap"
+      >
+        <view class="task-card-header flex-between">
+          <text class="task-name ellipsis">{{item.name || item.courseName || '培训课程'}}</text>
+          <text class="tag {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+        <view class="task-card-body">
+          <view class="task-info-row" wx:if="{{item.courseName}}">
+            <text class="info-label">培训课程：</text>
+            <text class="info-value">{{item.courseName}}</text>
+          </view>
+          <view class="task-info-row" wx:if="{{item.deadlineText}}">
+            <text class="info-label">截止时间：</text>
+            <text class="info-value {{item.status === 'overdue' ? 'text-danger' : ''}}">{{item.deadlineText}}</text>
+          </view>
+          <view class="task-progress-row" wx:if="{{item.status === 'studying' || item.status === 'waiting_exam'}}">
+            <view class="progress-bar-wrap">
+              <view class="progress-bar" style="width: {{item.progressPercent}}%"></view>
+            </view>
+            <text class="progress-text">{{item.progressPercent}}%</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && taskList.length === 0}}">
+      <text class="empty-text">暂无培训任务</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{!hasMore && taskList.length > 0}}">
+      <text class="loading-text">没有更多了</text>
+    </view>
+  </view>
+</view>

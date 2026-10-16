@@ -1,0 +1,142 @@
+/* pages/course/detail.wxss - 课程详情 */
+
+.page-course-detail {
+  padding: 20rpx 30rpx 180rpx;
+}
+
+/* 头部 */
+.detail-header {
+  margin-bottom: 20rpx;
+}
+
+.detail-title-row {
+  margin-bottom: 20rpx;
+}
+
+.detail-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16rpx;
+}
+
+.meta-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 4rpx;
+}
+
+.meta-value {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 区块 */
+.section {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #1890ff;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* 信息网格 */
+.info-grid {
+  display: flex;
+}
+
+.info-item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 资源统计 */
+.resource-grid {
+  display: flex;
+}
+
+.resource-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.resource-num {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #1890ff;
+  line-height: 1.3;
+}
+
+.resource-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 底部操作栏 */
+.action-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+}
+
+.action-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}
+
+.back-btn {
+  width: 220rpx;
+  margin-right: 20rpx;
+}
+
+.enroll-btn {
+  flex: 1;
+}

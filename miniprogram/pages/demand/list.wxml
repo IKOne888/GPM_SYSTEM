@@ -1,0 +1,101 @@
+<!--pages/demand/list.wxml - 培训需求申报（我的申报列表）-->
+<view class="page-demand">
+  <!-- 各状态统计条 -->
+  <view class="stat-bar">
+    <view class="stat-item">
+      <text class="stat-num stat-num--pending">{{stat.pending}}</text>
+      <text class="stat-label">待处理</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num stat-num--done">{{stat.accepted}}</text>
+      <text class="stat-label">已采纳</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num stat-num--reject">{{stat.rejected}}</text>
+      <text class="stat-label">已拒绝</text>
+    </view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="filter-bar">
+    <view class="filter-item {{statusFilter === '' ? 'active' : ''}}" data-value="" bindtap="onFilterTap">全部</view>
+    <view class="filter-item {{statusFilter === '0' ? 'active' : ''}}" data-value="0" bindtap="onFilterTap">待处理</view>
+    <view class="filter-item {{statusFilter === '1' ? 'active' : ''}}" data-value="1" bindtap="onFilterTap">已采纳</view>
+    <view class="filter-item {{statusFilter === '2' ? 'active' : ''}}" data-value="2" bindtap="onFilterTap">已拒绝</view>
+  </view>
+
+  <!-- 我的申报列表 -->
+  <view class="demand-list container">
+    <block wx:if="{{demandList.length > 0}}">
+      <view
+        wx:for="{{demandList}}"
+        wx:key="id"
+        class="demand-card card"
+        data-id="{{item.id}}"
+        bindtap="onDemandTap"
+      >
+        <view class="demand-head flex-between">
+          <text class="demand-title ellipsis">{{item.title}}</text>
+          <text class="tag {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+        <text class="demand-content ellipsis-2">{{item.content}}</text>
+        <view class="demand-foot flex-between">
+          <text class="demand-topic" wx:if="{{item.trainingTopic}}">主题：{{item.trainingTopic}}</text>
+          <text class="demand-time">{{item.createTimeText}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && demandList.length === 0}}">
+      <text class="empty-text">暂无培训需求申报记录</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{!hasMore && demandList.length > 0}}">
+      <text class="loading-text">没有更多了</text>
+    </view>
+  </view>
+
+  <!-- 底部提交按钮（悬浮） -->
+  <view class="submit-bar">
+    <button class="btn-primary submit-btn" bindtap="onGoSubmit">我要提需求</button>
+  </view>
+
+  <!-- 详情弹窗 -->
+  <view class="modal-mask" wx:if="{{showDetailModal}}" bindtap="onCloseDetail">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">{{detail.title}}</view>
+      <view class="detail-block">
+        <text class="detail-label">状态</text>
+        <text class="tag {{detail.statusClass}}">{{detail.statusText}}</text>
+      </view>
+      <view class="detail-block">
+        <text class="detail-label">需求内容</text>
+        <text class="detail-text">{{detail.content}}</text>
+      </view>
+      <view class="detail-block" wx:if="{{detail.trainingTopic}}">
+        <text class="detail-label">培训主题</text>
+        <text class="detail-text">{{detail.trainingTopic}}</text>
+      </view>
+      <view class="detail-block" wx:if="{{detail.trainingTarget}}">
+        <text class="detail-label">培训对象</text>
+        <text class="detail-text">{{detail.trainingTarget}}</text>
+      </view>
+      <view class="detail-block" wx:if="{{detail.reason}}">
+        <text class="detail-label">处理意见</text>
+        <text class="detail-text">{{detail.reason}}</text>
+      </view>
+      <view class="detail-block">
+        <text class="detail-label">提交时间</text>
+        <text class="detail-text">{{detail.createTimeText}}</text>
+      </view>
+      <view class="modal-btns">
+        <button class="btn-primary modal-btn" bindtap="onCloseDetail">关闭</button>
+      </view>
+    </view>
+  </view>
+</view>

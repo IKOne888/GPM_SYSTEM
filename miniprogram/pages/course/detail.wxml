@@ -1,0 +1,88 @@
+<!--pages/course/detail.wxml - 课程详情-->
+<view class="page-course-detail" wx:if="{{course}}">
+  <!-- 课程概要 -->
+  <view class="detail-header card">
+    <view class="detail-title-row flex-between">
+      <text class="detail-title">{{course.name}}</text>
+      <text class="tag {{course.enrolled ? 'tag-done' : 'tag-pending'}}">{{course.enrolled ? '已报名' : '未报名'}}</text>
+    </view>
+    <view class="detail-meta">
+      <view class="meta-item" wx:if="{{course.code}}">
+        <text class="meta-label">课程编码</text>
+        <text class="meta-value">{{course.code}}</text>
+      </view>
+      <view class="meta-item" wx:if="{{course.categoryName}}">
+        <text class="meta-label">课程分类</text>
+        <text class="meta-value">{{course.categoryName}}</text>
+      </view>
+      <view class="meta-item" wx:if="{{course.sopCode}}">
+        <text class="meta-label">SOP编号</text>
+        <text class="meta-value">{{course.sopCode}} {{course.sopVersion || ''}}</text>
+      </view>
+      <view class="meta-item" wx:if="{{course.trainingHours}}">
+        <text class="meta-label">培训学时</text>
+        <text class="meta-value">{{course.trainingHours}}学时</text>
+      </view>
+      <view class="meta-item" wx:if="{{course.passScore}}">
+        <text class="meta-label">及格分</text>
+        <text class="meta-value">{{course.passScore}}分</text>
+      </view>
+      <view class="meta-item" wx:if="{{course.retrainPeriod}}">
+        <text class="meta-label">复训周期</text>
+        <text class="meta-value">{{course.retrainPeriod}}天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 培训目标 -->
+  <view class="section card" wx:if="{{course.objective}}">
+    <view class="section-title">培训目标</view>
+    <text class="section-content">{{course.objective}}</text>
+  </view>
+
+  <!-- 适用范围 -->
+  <view class="section card" wx:if="{{course.departmentName || course.positionName}}">
+    <view class="section-title">适用范围</view>
+    <view class="info-grid">
+      <view class="info-item" wx:if="{{course.departmentName}}">
+        <text class="info-label">适用部门</text>
+        <text class="info-value">{{course.departmentName}}</text>
+      </view>
+      <view class="info-item" wx:if="{{course.positionName}}">
+        <text class="info-label">适用岗位</text>
+        <text class="info-value">{{course.positionName}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 课程资源统计 -->
+  <view class="section card">
+    <view class="section-title">课程资源</view>
+    <view class="resource-grid">
+      <view class="resource-item">
+        <text class="resource-num">{{course.videoCount || 0}}</text>
+        <text class="resource-label">视频课件</text>
+      </view>
+      <view class="resource-item">
+        <text class="resource-num">{{course.fileCount || 0}}</text>
+        <text class="resource-label">课程资料</text>
+      </view>
+      <view class="resource-item">
+        <text class="resource-num">{{course.questionCount || 0}}</text>
+        <text class="resource-label">题库题目</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="action-bar">
+    <button class="btn-secondary action-btn back-btn" bindtap="onBack">返回</button>
+    <button
+      class="{{course.enrolled ? 'btn-secondary' : 'btn-primary'}} action-btn enroll-btn"
+      bindtap="onEnroll"
+      disabled="{{enrolling}}"
+    >
+      {{course.enrolled ? '进入学习任务' : (enrolling ? '报名中...' : '立即报名')}}
+    </button>
+  </view>
+</view>

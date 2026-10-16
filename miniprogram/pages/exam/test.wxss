@@ -1,0 +1,260 @@
+/* pages/exam/test.wxss - 在线答题 */
+
+.page-exam-test {
+  padding-bottom: 180rpx;
+}
+
+/* 顶部固定栏 */
+.exam-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.topbar-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.paper-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.question-progress {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.countdown {
+  background: #e6f7ff;
+  color: #1890ff;
+  border-radius: 30rpx;
+  padding: 8rpx 20rpx;
+  margin-right: 16rpx;
+}
+
+/* 剩余 1 分钟内标红 */
+.countdown-danger {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.countdown-text {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.answered-tip {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 答题卡 */
+.card-panel {
+  background: #fff;
+  padding: 24rpx 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-cell {
+  width: 76rpx;
+  height: 76rpx;
+  margin: 0 16rpx 16rpx 0;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.card-cell-answered {
+  background: #e6f7ff;
+  border-color: #91d5ff;
+  color: #1890ff;
+}
+
+.card-cell-active {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 题目区 */
+.question-panel {
+  background: #fff;
+  margin: 0 30rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+}
+
+.question-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.type-tag {
+  background: #e6f7ff;
+  color: #1890ff;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.question-score {
+  font-size: 24rpx;
+  color: #fa8c16;
+  font-weight: bold;
+}
+
+.question-content {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 30rpx;
+}
+
+.question-index {
+  font-weight: bold;
+  margin-right: 6rpx;
+}
+
+/* 选项 */
+.option-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 24rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  margin-bottom: 18rpx;
+}
+
+.option-item-selected {
+  border-color: #1890ff;
+  background: #f0f8ff;
+}
+
+.option-label {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #f0f2f5;
+  color: #666;
+  font-size: 26rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.option-item-selected .option-label {
+  background: #1890ff;
+  color: #fff;
+}
+
+.option-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+.multi-tip {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+/* 填空/简答 */
+.text-answer {
+  margin-bottom: 20rpx;
+}
+
+.answer-input {
+  border: 2rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  height: 60rpx;
+}
+
+.answer-textarea {
+  border: 2rpx solid #e8e8e8;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  height: 260rpx;
+  box-sizing: border-box;
+}
+
+/* 题目底部操作 */
+.question-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.footer-btn {
+  min-width: 220rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  font-size: 28rpx;
+  border-radius: 38rpx;
+  margin: 0;
+}
+
+/* 底部交卷栏 */
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}

@@ -1,0 +1,73 @@
+<!--pages/profile/certificate.wxml - 培训档案 / 证书-->
+<view class="page-certificate">
+  <view class="cert-list container">
+    <block wx:if="{{certList.length > 0}}">
+      <view
+        wx:for="{{certList}}"
+        wx:key="courseId"
+        class="cert-card card {{item.statusClass}}"
+      >
+        <!-- 卡片头部：课程名 + 状态 -->
+        <view class="cert-head flex-between">
+          <text class="cert-name ellipsis">{{item.courseName}}</text>
+          <text class="cert-status">{{item.statusText}}</text>
+        </view>
+
+        <!-- 课程元信息 -->
+        <view class="cert-meta">
+          <view class="meta-item" wx:if="{{item.courseCode}}">
+            <text class="meta-label">课程编码</text>
+            <text class="meta-value">{{item.courseCode}}</text>
+          </view>
+          <view class="meta-item" wx:if="{{item.sopCode}}">
+            <text class="meta-label">SOP编号</text>
+            <text class="meta-value">{{item.sopCode}} {{item.sopVersion || ''}}</text>
+          </view>
+          <view class="meta-item" wx:if="{{item.trainingHours}}">
+            <text class="meta-label">培训学时</text>
+            <text class="meta-value">{{item.trainingHours}}学时</text>
+          </view>
+          <view class="meta-item" wx:if="{{item.retrainPeriod}}">
+            <text class="meta-label">再培训周期</text>
+            <text class="meta-value">{{item.retrainPeriod}}天</text>
+          </view>
+        </view>
+
+        <!-- 通过信息 -->
+        <view class="cert-body" wx:if="{{item.status !== 'not_pass'}}">
+          <view class="cert-row">
+            <text class="cert-label">最近通过时间</text>
+            <text class="cert-value">{{item.lastPassTimeText || '-'}}</text>
+          </view>
+          <view class="cert-row">
+            <text class="cert-label">最近通过成绩</text>
+            <text class="cert-value">{{item.examScore}}分</text>
+          </view>
+          <view class="cert-row">
+            <text class="cert-label">有效期至</text>
+            <text class="cert-value">{{item.validUntilText || '-'}}</text>
+          </view>
+          <view class="cert-row">
+            <text class="cert-label">剩余天数</text>
+            <text class="cert-value {{item.remainDays < 0 ? 'text-danger' : (item.remainDays <= 30 ? 'text-warning' : 'text-success')}}">
+              {{item.remainDays >= 0 ? item.remainDays + ' 天' : '已过期 ' + (-item.remainDays) + ' 天'}}
+            </text>
+          </view>
+        </view>
+
+        <!-- 未通过提示 -->
+        <view class="cert-notpass-tip" wx:else>
+          <text>暂未通过该课程考试，暂无法生成证书</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && certList.length === 0}}">
+      <text class="empty-text">暂无培训档案记录</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,56 @@
+# ==================== IDE / 编辑器 ====================
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+
+# ==================== Java / Maven ====================
+target/
+*.class
+*.jar
+*.war
+*.log
+.mvn/wrapper/maven-wrapper.jar
+
+# ==================== Node / npm / pnpm ====================
+node_modules/
+dist/
+dist-ssr/
+*.local
+.npm/
+.cache/
+.vite/
+.temp/
+
+# ==================== 小程序 ====================
+miniprogram/node_modules/
+miniprogram/dist/
+
+# ==================== 日志 ====================
+logs/
+*.log
+
+# ==================== 环境 / 敏感配置 ====================
+.env
+.env.local
+.env.*.local
+application-local.yml
+application-dev.yml
+# 密钥/数据库密码等通过环境变量注入，禁止入库
+
+# ==================== 临时文件 ====================
+*.tmp
+*.bak
+*.swp
+*~
+
+# ==================== 后端运行时数据 ====================
+backend/minio-data/
+backend/upload/
+
+# ==================== 文档生成产物（按需取消注释） ====================
+# docs/*.pdf
+# docs/*.docx

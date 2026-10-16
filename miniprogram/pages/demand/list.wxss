@@ -1,0 +1,192 @@
+/* pages/demand/list.wxss - 培训需求申报（我的申报列表） */
+
+.page-demand {
+  padding-bottom: 160rpx;
+}
+
+/* 顶部统计条 */
+.stat-bar {
+  display: flex;
+  background: #fff;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-num--pending {
+  color: #1890ff;
+}
+
+.stat-num--done {
+  color: #52c41a;
+}
+
+.stat-num--reject {
+  color: #ff4d4f;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 状态筛选 */
+.filter-bar {
+  display: flex;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.filter-item {
+  padding: 8rpx 26rpx;
+  font-size: 26rpx;
+  color: #666;
+  border-radius: 30rpx;
+  margin-right: 16rpx;
+}
+
+.filter-item.active {
+  background: #1890ff;
+  color: #fff;
+}
+
+/* 需求卡片 */
+.demand-list {
+  padding-top: 20rpx;
+}
+
+.demand-card {
+  margin-bottom: 20rpx;
+}
+
+.demand-head {
+  margin-bottom: 14rpx;
+}
+
+.demand-title {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.demand-content {
+  display: block;
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+}
+
+.demand-foot {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.demand-topic {
+  flex: 1;
+  margin-right: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.demand-time {
+  flex-shrink: 0;
+}
+
+/* 底部悬浮提交按钮 */
+.submit-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}
+
+/* 详情弹窗 */
+.modal-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-box {
+  width: 620rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx 30rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.detail-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24rpx;
+}
+
+.detail-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.detail-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+.modal-btns {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  margin: 0 10rpx;
+}

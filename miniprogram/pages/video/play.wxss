@@ -1,0 +1,262 @@
+/* pages/video/play.wxss - 在线学习（视频播放页） */
+
+.page-video-play {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 视频容器（黑色底，保证画面比例） */
+.video-container {
+  width: 100%;
+  background: #000;
+}
+
+.video-player {
+  width: 100%;
+  height: 420rpx;
+}
+
+/* 播放控制栏 */
+.control-bar {
+  background: #fff;
+  padding: 20rpx 30rpx;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+}
+
+.time-text {
+  font-size: 24rpx;
+  color: #666;
+  width: 90rpx;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.progress-slider {
+  flex: 1;
+  margin: 0 10rpx;
+}
+
+/* 控制按钮区 */
+.control-btns {
+  margin-top: 16rpx;
+}
+
+.control-left {
+  position: relative;
+}
+
+.speed-btn {
+  padding: 8rpx 24rpx;
+  border: 2rpx solid #1890ff;
+  border-radius: 30rpx;
+  color: #1890ff;
+  font-size: 26rpx;
+}
+
+.speed-text {
+  font-size: 26rpx;
+}
+
+/* 倍速选择器 */
+.speed-picker {
+  position: absolute;
+  top: 60rpx;
+  left: 0;
+  background: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+  padding: 10rpx 0;
+  z-index: 20;
+  min-width: 160rpx;
+}
+
+.speed-option {
+  padding: 16rpx 30rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.speed-option.active {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.playlist-btn {
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 26rpx;
+}
+
+/* 视频信息栏 */
+.video-info-bar {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.video-study-info {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 播放列表面板（从底部滑出） */
+.playlist-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 30;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-panel.show {
+  transform: translateY(0);
+}
+
+.playlist-header {
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.playlist-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.playlist-close {
+  font-size: 32rpx;
+  color: #999;
+  padding: 0 10rpx;
+}
+
+.playlist-scroll {
+  max-height: 55vh;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.playlist-item.active {
+  background: #e6f7ff;
+}
+
+.pl-index {
+  width: 48rpx;
+  height: 48rpx;
+  background: #e6f7ff;
+  color: #1890ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.pl-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pl-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.pl-duration {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.pl-status {
+  flex-shrink: 0;
+}
+
+.playing-icon {
+  font-size: 22rpx;
+  color: #1890ff;
+}
+
+/* 遮罩层 */
+.mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 15;
+}
+
+/* 防挂机弹窗 */
+.anti-idle-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.anti-idle-dialog {
+  width: 560rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 50rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anti-idle-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.anti-idle-desc {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+  text-align: center;
+}
+
+.anti-idle-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+}

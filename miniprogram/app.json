@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/index",
+    "pages/task/list",
+    "pages/task/detail",
+    "pages/video/play",
+    "pages/exam/enter",
+    "pages/exam/test",
+    "pages/exam/result",
+    "pages/course/list",
+    "pages/course/detail",
+    "pages/message/list",
+    "pages/profile/index",
+    "pages/profile/record",
+    "pages/profile/certificate",
+    "pages/demand/list",
+    "pages/demand/submit"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "GMP培训系统",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1890ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的任务"
+      },
+      {
+        "pagePath": "pages/course/list",
+        "text": "课程中心"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

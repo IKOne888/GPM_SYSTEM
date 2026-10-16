@@ -1,0 +1,123 @@
+<!--pages/exam/test.wxml - 在线答题-->
+<view class="page-exam-test">
+  <!-- 顶部固定栏：试卷名 + 倒计时 + 已答 -->
+  <view class="exam-topbar">
+    <view class="topbar-left">
+      <text class="paper-name ellipsis">{{paperName}}</text>
+      <text class="question-progress">第 {{currentIndex + 1}} / {{questions.length}} 题</text>
+    </view>
+    <view class="topbar-right">
+      <view class="countdown {{remainSeconds <= 60 ? 'countdown-danger' : ''}}">
+        <text class="countdown-text">{{countdownText}}</text>
+      </view>
+      <text class="answered-tip">已答 {{answeredCount}}/{{questions.length}}</text>
+    </view>
+  </view>
+
+  <!-- 答题卡 -->
+  <view class="card-panel">
+    <view class="card-grid">
+      <view
+        wx:for="{{questions}}"
+        wx:key="id"
+        class="card-cell {{index === currentIndex ? 'card-cell-active' : ''}} {{item.userAnswer && item.userAnswer.length > 0 ? 'card-cell-answered' : ''}}"
+        data-index="{{index}}"
+        bindtap="onCardTap"
+      >
+        {{index + 1}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目作答区 -->
+  <view class="question-panel" wx:if="{{currentQuestion}}">
+    <!-- 题型与分值 -->
+    <view class="question-head">
+      <text class="type-tag">{{currentQuestion.typeName}}</text>
+      <text class="question-score">{{currentQuestion.score}} 分</text>
+    </view>
+
+    <!-- 题干 -->
+    <view class="question-content">
+      <text class="question-index">{{currentIndex + 1}}.</text>
+      <text>{{currentQuestion.content}}</text>
+    </view>
+
+    <!-- 单选 / 判断（互斥选择） -->
+    <view class="option-list" wx:if="{{currentQuestion.questionType === 1 || currentQuestion.questionType === 3}}">
+      <view
+        wx:for="{{currentQuestion.options}}"
+        wx:key="value"
+        wx:for-item="opt"
+        wx:for-index="oi"
+        class="option-item {{opt.selected ? 'option-item-selected' : ''}}"
+        data-qi="{{currentIndex}}"
+        data-oi="{{oi}}"
+        bindtap="onOptionTap"
+      >
+        <text class="option-label">{{opt.label}}</text>
+        <text class="option-text">{{opt.text}}</text>
+      </view>
+    </view>
+
+    <!-- 多选 -->
+    <view class="option-list" wx:elif="{{currentQuestion.questionType === 2}}">
+      <view
+        wx:for="{{currentQuestion.options}}"
+        wx:key="value"
+        wx:for-item="opt"
+        wx:for-index="oi"
+        class="option-item {{opt.selected ? 'option-item-selected' : ''}}"
+        data-qi="{{currentIndex}}"
+        data-oi="{{oi}}"
+        bindtap="onMultiTap"
+      >
+        <text class="option-label">{{opt.label}}</text>
+        <text class="option-text">{{opt.text}}</text>
+      </view>
+      <view class="multi-tip">本题为多选题，请选择所有正确选项</view>
+    </view>
+
+    <!-- 填空题 -->
+    <view class="text-answer" wx:elif="{{currentQuestion.questionType === 4}}">
+      <input
+        class="answer-input"
+        placeholder="请输入答案"
+        value="{{currentQuestion.userAnswer}}"
+        data-qi="{{currentIndex}}"
+        bindinput="onTextInput"
+      />
+    </view>
+
+    <!-- 简答题 -->
+    <view class="text-answer" wx:else>
+      <textarea
+        class="answer-textarea"
+        placeholder="请输入你的作答内容"
+        value="{{currentQuestion.userAnswer}}"
+        data-qi="{{currentIndex}}"
+        bindinput="onTextInput"
+        maxlength="1000"
+      />
+    </view>
+
+    <!-- 上一题 / 下一题 -->
+    <view class="question-footer">
+      <button class="footer-btn btn-secondary" bindtap="onPrev" disabled="{{currentIndex === 0}}">上一题</button>
+      <button class="footer-btn btn-secondary" wx:if="{{currentIndex < questions.length - 1}}" bindtap="onNext">下一题</button>
+      <button class="footer-btn btn-primary" wx:else bindtap="onSubmit" disabled="{{submitting}}">交卷并判分</button>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && questions.length === 0}}">
+    <text class="empty-text">该试卷暂无题目</text>
+  </view>
+
+  <!-- 底部交卷 -->
+  <view class="submit-bar" wx:if="{{questions.length > 0}}">
+    <button class="btn-primary submit-btn" bindtap="onSubmit" disabled="{{submitting}}">
+      {{submitting ? '提交中...' : '交 卷'}}
+    </button>
+  </view>
+</view>

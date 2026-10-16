@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: gmp-training-system
+  profiles:
+    # 默认使用 dev 环境；生产部署通过环境变量 SPRING_PROFILES_ACTIVE=prod 覆盖
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  # 数据源/Redis/MinIO 等环境相关配置按 profile 拆分到 application-{env}.yml，
+  # 敏感信息一律通过环境变量注入，禁止硬编码到配置文件中
+  servlet:
+    multipart:
+      # 单文件/单请求大小上限（可通过环境变量覆盖）
+      max-file-size: ${MULTIPART_MAX_FILE_SIZE:500MB}
+      max-request-size: ${MULTIPART_MAX_REQUEST_SIZE:500MB}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.gmp.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    # 生产环境不打印 SQL 到 stdout（避免参数值泄露），各环境在 profile 文件中显式控制
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  # Sa-Token 1.37.0 起配置项由 activity-timeout 更名为 active-timeout
+  active-timeout: -1
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: false
+  is-read-cookie: false
+  is-read-header: true
+
+knife4j:
+  enable: ${KNIFE4J_ENABLE:true}
+  setting:
+    language: zh_cn
+
+logging:
+  config: classpath:logback-spring.xml

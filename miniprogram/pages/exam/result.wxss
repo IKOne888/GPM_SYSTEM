@@ -1,0 +1,273 @@
+/* pages/exam/result.wxss - 考试成绩与解析 */
+
+.page-exam-result {
+  padding: 20rpx 30rpx 180rpx;
+}
+
+/* 成绩概览 */
+.score-header {
+  border-radius: 20rpx;
+  padding: 50rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.score-header.pass {
+  background: linear-gradient(135deg, #52c41a 0%, #95de64 100%);
+}
+
+.score-header.fail {
+  background: linear-gradient(135deg, #ff7875 0%, #ffa39e 100%);
+}
+
+.score-status {
+  color: #fff;
+  font-size: 30rpx;
+  margin-bottom: 16rpx;
+}
+
+.score-value {
+  display: flex;
+  align-items: baseline;
+}
+
+.score-num {
+  color: #fff;
+  font-size: 90rpx;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.score-total {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+.score-pass {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+
+/* 明细卡片 */
+.detail-card {
+  padding: 10rpx 30rpx;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 26rpx;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333;
+  max-width: 60%;
+}
+
+/* 解析标题 */
+.analysis-head {
+  padding: 20rpx 6rpx;
+}
+
+.analysis-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.analysis-toggle {
+  font-size: 26rpx;
+  color: #1890ff;
+}
+
+/* 解析卡片 */
+.analysis-card {
+  padding: 30rpx;
+}
+
+.analysis-top {
+  margin-bottom: 20rpx;
+}
+
+.analysis-left {
+  display: flex;
+  align-items: center;
+}
+
+.type-tag {
+  background: #e6f7ff;
+  color: #1890ff;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+}
+
+.analysis-index {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.analysis-score {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.text-success {
+  color: #52c41a !important;
+}
+
+.text-danger {
+  color: #ff4d4f !important;
+}
+
+.analysis-content {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+}
+
+/* 选项 */
+.analysis-options {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.analysis-option {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  border: 2rpx solid #f0f0f0;
+  border-radius: 10rpx;
+  margin-bottom: 12rpx;
+}
+
+.opt-correct {
+  border-color: #b7eb8f;
+  background: #f6ffed;
+}
+
+.opt-user {
+  border-color: #ffbb96;
+  background: #fff7f0;
+}
+
+.opt-label {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: #f0f2f5;
+  color: #666;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.opt-text {
+  font-size: 26rpx;
+  color: #333;
+  flex: 1;
+}
+
+.opt-mark {
+  font-size: 22rpx;
+  color: #52c41a;
+  flex-shrink: 0;
+  margin-left: 10rpx;
+}
+
+.opt-mark-user {
+  font-size: 22rpx;
+  color: #fa8c16;
+  flex-shrink: 0;
+  margin-left: 10rpx;
+}
+
+/* 答案对比 */
+.answer-compare {
+  background: #fafafa;
+  border-radius: 10rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.compare-row {
+  display: flex;
+  align-items: center;
+  padding: 6rpx 0;
+}
+
+.compare-label {
+  font-size: 26rpx;
+  color: #999;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.compare-value {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 解析文本 */
+.analysis-tip {
+  display: flex;
+  padding-top: 16rpx;
+  border-top: 1rpx dashed #f0f0f0;
+}
+
+.tip-label {
+  font-size: 26rpx;
+  color: #999;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* 底部返回 */
+.action-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.action-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}

@@ -1,0 +1,79 @@
+<!--pages/login/index.wxml - 登录页（账号密码 + 图形验证码）-->
+<view class="page-login">
+  <!-- 顶部品牌区 -->
+  <view class="login-header">
+    <view class="logo-wrap">
+      <view class="logo-icon">GMP</view>
+    </view>
+    <text class="app-title">GMP内部培训系统</text>
+    <text class="app-subtitle">员工学习端</text>
+  </view>
+
+  <!-- 登录表单 -->
+  <view class="login-form">
+    <!-- 用户名 -->
+    <view class="form-item">
+      <view class="form-icon">👤</view>
+      <input
+        class="form-input"
+        placeholder="请输入用户名"
+        value="{{username}}"
+        bindinput="onUsernameInput"
+        type="text"
+      />
+    </view>
+
+    <!-- 密码 -->
+    <view class="form-item">
+      <view class="form-icon">🔒</view>
+      <input
+        class="form-input"
+        placeholder="请输入密码"
+        value="{{password}}"
+        bindinput="onPasswordInput"
+        password="{{true}}"
+      />
+    </view>
+
+    <!-- 图形验证码 -->
+    <view class="form-item">
+      <view class="form-icon">🔑</view>
+      <input
+        class="form-input"
+        placeholder="请输入验证码"
+        value="{{captchaCode}}"
+        bindinput="onCaptchaInput"
+        maxlength="6"
+      />
+      <!-- 点击图片刷新验证码 -->
+      <image
+        class="captcha-img"
+        src="{{captchaImage}}"
+        mode="aspectFit"
+        bindtap="onCaptchaTap"
+      />
+    </view>
+
+    <!-- 记住用户名 -->
+    <view class="form-options">
+      <view class="remember-pwd" bindtap="onRememberChange">
+        <view class="checkbox {{rememberUsername ? 'checked' : ''}}"></view>
+        <text>记住用户名</text>
+      </view>
+    </view>
+
+    <!-- 登录按钮 -->
+    <button
+      class="login-btn {{loading ? 'btn-disabled' : 'btn-primary'}}"
+      bindtap="onLogin"
+      disabled="{{loading}}"
+    >
+      {{loading ? '登录中...' : '登 录'}}
+    </button>
+  </view>
+
+  <!-- 底部版权 -->
+  <view class="login-footer">
+    <text class="footer-text">GMP内部培训系统 v1.0</text>
+  </view>
+</view>

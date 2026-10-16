@@ -1,0 +1,167 @@
+/* pages/profile/record.wxss - 学习记录 + 成绩单 */
+
+.page-record {
+  padding-bottom: 30rpx;
+}
+
+/* Tab 栏 */
+.tab-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 26rpx 0;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background: #1890ff;
+}
+
+/* 记录卡片 */
+.record-list {
+  padding-top: 20rpx;
+}
+
+.record-card {
+  margin-bottom: 20rpx;
+}
+
+.record-head {
+  margin-bottom: 16rpx;
+}
+
+.record-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.exam-title-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  margin-right: 20rpx;
+}
+
+.exam-course {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+/* 成绩徽标 */
+.exam-score {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.exam-score.pass {
+  background: #f6ffed;
+}
+
+.exam-score.fail {
+  background: #fff1f0;
+}
+
+.exam-score .score-num {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.exam-score.pass .score-num {
+  color: #52c41a;
+}
+
+.exam-score.fail .score-num {
+  color: #ff4d4f;
+}
+
+.score-suffix {
+  font-size: 20rpx;
+  color: #999;
+  margin-left: 2rpx;
+}
+
+/* 信息行 */
+.record-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.record-label {
+  font-size: 24rpx;
+  color: #999;
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.record-value {
+  font-size: 26rpx;
+  color: #666;
+  flex: 1;
+}
+
+/* 进度条 */
+.record-progress {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.progress-bar-wrap {
+  flex: 1;
+  height: 12rpx;
+  background: #f0f0f0;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #1890ff, #36cfc9);
+  border-radius: 6rpx;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #1890ff;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* 单行省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

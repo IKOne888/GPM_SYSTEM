@@ -1,0 +1,27 @@
+{
+  "name": "gmp-training-system-frontend-pc",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GMP培训管理系统 - PC管理端",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "axios": "^1.6.8",
+    "element-plus": "^2.7.0",
+    "@element-plus/icons-vue": "^2.3.1",
+    "pinia": "^2.1.7",
+    "echarts": "^5.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.0",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.27.0"
+  }
+}

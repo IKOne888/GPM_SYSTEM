@@ -1,0 +1,103 @@
+<!--pages/exam/result.wxml - 考试成绩与解析-->
+<view class="page-exam-result" wx:if="{{result}}">
+  <!-- 成绩概览 -->
+  <view class="score-header {{result.pass === 1 ? 'pass' : 'fail'}}">
+    <text class="score-status">{{result.pass === 1 ? '恭喜通过' : '很遗憾，未通过'}}</text>
+    <view class="score-value">
+      <text class="score-num">{{result.score}}</text>
+      <text class="score-total">/ {{result.totalScore}} 分</text>
+    </view>
+    <text class="score-pass">及格分 {{result.passScore}} 分</text>
+  </view>
+
+  <!-- 明细 -->
+  <view class="detail-card card">
+    <view class="detail-row">
+      <text class="detail-label">试卷名称</text>
+      <text class="detail-value ellipsis">{{result.paperName}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">答对题数</text>
+      <text class="detail-value">{{result.correctCount}} / {{result.questionCount}} 题</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">第几次考试</text>
+      <text class="detail-value">第 {{result.retryCount}} 次</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">答题时长</text>
+      <text class="detail-value">{{result.durationText}}</text>
+    </view>
+    <view class="detail-row">
+      <text class="detail-label">交卷时间</text>
+      <text class="detail-value">{{result.submitTimeText}}</text>
+    </view>
+  </view>
+
+  <!-- 解析开关 -->
+  <view class="analysis-head flex-between" bindtap="toggleAnalysis">
+    <text class="analysis-title">逐题解析 ({{items.length}})</text>
+    <text class="analysis-toggle">{{showAnalysis ? '收起' : '展开'}}</text>
+  </view>
+
+  <!-- 逐题解析 -->
+  <block wx:if="{{showAnalysis}}">
+    <view
+      wx:for="{{items}}"
+      wx:key="id"
+      class="analysis-card card"
+    >
+      <!-- 题头 -->
+      <view class="analysis-top flex-between">
+        <view class="analysis-left">
+          <text class="type-tag">{{item.typeName}}</text>
+          <text class="analysis-index">第 {{index + 1}} 题</text>
+        </view>
+        <text class="analysis-score {{item.isCorrect === 1 ? 'text-success' : 'text-danger'}}">
+          {{item.earnedScore}} / {{item.score}} 分
+        </text>
+      </view>
+
+      <!-- 题干 -->
+      <view class="analysis-content">{{item.content}}</view>
+
+      <!-- 选项（单选/多选） -->
+      <view class="analysis-options" wx:if="{{item.options.length > 0}}">
+        <view
+          wx:for="{{item.options}}"
+          wx:key="label"
+          wx:for-item="opt"
+          class="analysis-option {{opt.isAnswer ? 'opt-correct' : ''}} {{opt.userSelected ? 'opt-user' : ''}}"
+        >
+          <text class="opt-label">{{opt.label}}</text>
+          <text class="opt-text">{{opt.text}}</text>
+          <text class="opt-mark" wx:if="{{opt.isAnswer}}">正确答案</text>
+          <text class="opt-mark-user" wx:if="{{opt.userSelected && !opt.isAnswer}}">我的选择</text>
+        </view>
+      </view>
+
+      <!-- 作答对比 -->
+      <view class="answer-compare">
+        <view class="compare-row">
+          <text class="compare-label">我的答案</text>
+          <text class="compare-value {{item.isCorrect === 1 ? 'text-success' : 'text-danger'}}">{{item.userAnswer || '未作答'}}</text>
+        </view>
+        <view class="compare-row">
+          <text class="compare-label">正确答案</text>
+          <text class="compare-value text-success">{{item.correctAnswer}}</text>
+        </view>
+      </view>
+
+      <!-- 解析 -->
+      <view class="analysis-tip" wx:if="{{item.analysis}}">
+        <text class="tip-label">解析：</text>
+        <text class="tip-text">{{item.analysis}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 底部返回 -->
+  <view class="action-bar">
+    <button class="btn-primary action-btn" bindtap="onBack">返 回</button>
+  </view>
+</view>

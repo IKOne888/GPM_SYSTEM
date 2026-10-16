@@ -1,0 +1,73 @@
+<!--pages/exam/enter.wxml - 考试须知-->
+<view class="page-exam-enter">
+  <!-- 试卷概要卡片 -->
+  <view class="exam-card card" wx:if="{{examInfo}}">
+    <view class="exam-title">{{examInfo.paperName || '在线考试'}}</view>
+
+    <!-- 关键参数 -->
+    <view class="param-grid">
+      <view class="param-item">
+        <text class="param-num">{{examInfo.questionCount || 0}}</text>
+        <text class="param-label">题目总数</text>
+      </view>
+      <view class="param-item">
+        <text class="param-num">{{examInfo.totalScore || 0}}</text>
+        <text class="param-label">试卷总分</text>
+      </view>
+      <view class="param-item">
+        <text class="param-num">{{examInfo.passScore || 0}}</text>
+        <text class="param-label">及格分数</text>
+      </view>
+      <view class="param-item">
+        <text class="param-num">{{examInfo.duration || 0}}</text>
+        <text class="param-label">考试时长(分)</text>
+      </view>
+    </view>
+
+    <!-- 剩余次数与上次成绩 -->
+    <view class="exam-extra">
+      <view class="extra-row">
+        <text class="extra-label">剩余考试次数</text>
+        <text class="extra-value">{{examInfo.remainRetry}} / {{examInfo.maxRetry}}</text>
+      </view>
+      <view class="extra-row" wx:if="{{examInfo.lastScore !== null && examInfo.lastScore !== undefined}}">
+        <text class="extra-label">上次考试成绩</text>
+        <text class="extra-value {{examInfo.lastPass === 1 ? 'text-success' : 'text-danger'}}">{{examInfo.lastScore}}分 {{examInfo.lastPass === 1 ? '(已通过)' : '(未通过)'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 考试须知 -->
+  <view class="notice-card card">
+    <view class="section-title">考试须知</view>
+    <view class="notice-list">
+      <view class="notice-item">1. 请在网络稳定环境下考试，中途请勿退出或刷新页面。</view>
+      <view class="notice-item">2. 考试开始后计时不可暂停，时间到将自动交卷。</view>
+      <view class="notice-item">3. 多选题需选择全部正确选项，漏选、多选均不得分。</view>
+      <view class="notice-item">4. 交卷后系统自动判分，可在成绩页查看逐题解析。</view>
+      <view class="notice-item">5. 达到考试次数上限后不可再参加本次考试。</view>
+    </view>
+  </view>
+
+  <!-- 不可考试提示 -->
+  <view class="reason-bar" wx:if="{{examInfo && examInfo.canExam === false}}">
+    <text class="reason-text">{{examInfo.reason || '当前不可参加考试'}}</text>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="action-bar">
+    <button
+      class="btn-secondary action-btn back-btn"
+      bindtap="onBack"
+    >
+      返回
+    </button>
+    <button
+      class="{{examInfo && examInfo.canExam === false ? 'btn-disabled' : 'btn-primary'}} action-btn start-btn"
+      bindtap="onStartExam"
+      disabled="{{starting || (examInfo && examInfo.canExam === false)}}"
+    >
+      {{starting ? '正在进入...' : '开始考试'}}
+    </button>
+  </view>
+</view>

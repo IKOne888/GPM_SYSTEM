@@ -1,0 +1,110 @@
+<!--pages/profile/record.wxml - 学习记录 + 成绩单-->
+<view class="page-record">
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'study' ? 'active' : ''}}" data-tab="study" bindtap="onTabTap">
+      学习记录
+    </view>
+    <view class="tab-item {{activeTab === 'exam' ? 'active' : ''}}" data-tab="exam" bindtap="onTabTap">
+      成绩单
+    </view>
+  </view>
+
+  <!-- 学习记录列表 -->
+  <block wx:if="{{activeTab === 'study'}}">
+    <view class="record-list container">
+      <block wx:if="{{studyList.length > 0}}">
+        <view
+          wx:for="{{studyList}}"
+          wx:key="id"
+          class="record-card card"
+        >
+          <view class="record-head flex-between">
+            <text class="record-title ellipsis">{{item.courseName || item.videoName}}</text>
+            <text class="tag {{item.isCompleted === 1 ? 'tag-done' : 'tag-studying'}}">{{item.isCompleted === 1 ? '已完成' : '学习中'}}</text>
+          </view>
+          <view class="record-row" wx:if="{{item.taskName}}">
+            <text class="record-label">任务</text>
+            <text class="record-value ellipsis">{{item.taskName}}</text>
+          </view>
+          <view class="record-row" wx:if="{{item.videoName}}">
+            <text class="record-label">视频</text>
+            <text class="record-value ellipsis">{{item.videoName}}</text>
+          </view>
+          <view class="record-row">
+            <text class="record-label">学习时长</text>
+            <text class="record-value">{{item.studyDurationText}}</text>
+          </view>
+          <view class="record-row">
+            <text class="record-label">学习时间</text>
+            <text class="record-value">{{item.lastStudyTimeText}}</text>
+          </view>
+          <view class="record-progress" wx:if="{{item.videoProgressPercent > 0}}">
+            <view class="progress-bar-wrap">
+              <view class="progress-bar" style="width: {{item.videoProgressPercent}}%"></view>
+            </view>
+            <text class="progress-text">{{item.videoProgressPercent}}%</text>
+          </view>
+        </view>
+      </block>
+
+      <view class="empty-state" wx:if="{{!loading && studyList.length === 0}}">
+        <text class="empty-text">暂无学习记录</text>
+      </view>
+      <view class="loading-wrap" wx:if="{{loading}}">
+        <text class="loading-text">加载中...</text>
+      </view>
+      <view class="loading-wrap" wx:if="{{!studyHasMore && studyList.length > 0}}">
+        <text class="loading-text">没有更多了</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 成绩单列表 -->
+  <block wx:else>
+    <view class="record-list container">
+      <block wx:if="{{examList.length > 0}}">
+        <view
+          wx:for="{{examList}}"
+          wx:key="recordId"
+          class="record-card card"
+          data-id="{{item.recordId}}"
+          bindtap="onExamTap"
+        >
+          <view class="record-head flex-between">
+            <view class="exam-title-wrap">
+              <text class="record-title ellipsis">{{item.paperName}}</text>
+              <text class="exam-course ellipsis">{{item.courseName}}</text>
+            </view>
+            <view class="exam-score {{item.pass === 1 ? 'pass' : 'fail'}}">
+              <text class="score-num">{{item.score}}</text>
+              <text class="score-suffix">分</text>
+            </view>
+          </view>
+          <view class="record-row">
+            <text class="record-label">及格分</text>
+            <text class="record-value">{{item.passScore}}分 {{item.pass === 1 ? '(已通过)' : '(未通过)'}}</text>
+          </view>
+          <view class="record-row">
+            <text class="record-label">提交时间</text>
+            <text class="record-value">{{item.submitTimeText}}</text>
+          </view>
+          <view class="record-row">
+            <text class="record-label">答题时长</text>
+            <text class="record-value">{{item.durationText}}</text>
+          </view>
+        </view>
+      </block>
+
+      <view class="empty-state" wx:if="{{!loading && examList.length === 0}}">
+        <text class="empty-text">暂无考试成绩</text>
+      </view>
+      <view class="loading-wrap" wx:if="{{loading}}">
+        <text class="loading-text">加载中...</text>
+      </view>
+      <view class="loading-wrap" wx:if="{{!examHasMore && examList.length > 0}}">
+        <text class="loading-text">没有更多了</text>
+      </view>
+    </view>
+  </block>
+</view>

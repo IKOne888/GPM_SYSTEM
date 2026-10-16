@@ -1,0 +1,140 @@
+/* pages/exam/enter.wxss - 考试须知 */
+
+.page-exam-enter {
+  padding: 20rpx 30rpx 200rpx;
+}
+
+/* 试卷概要 */
+.exam-card {
+  text-align: center;
+}
+
+.exam-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.param-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.param-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.param-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1890ff;
+  line-height: 1.3;
+}
+
+.param-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+/* 剩余次数 / 上次成绩 */
+.exam-extra {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.extra-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.extra-label {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.extra-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.text-success {
+  color: #52c41a !important;
+}
+
+.text-danger {
+  color: #ff4d4f !important;
+}
+
+/* 须知列表 */
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #1890ff;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notice-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.9;
+  margin-bottom: 8rpx;
+}
+
+/* 不可考试提示 */
+.reason-bar {
+  background: #fff1f0;
+  border-radius: 12rpx;
+  padding: 20rpx 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.reason-text {
+  font-size: 26rpx;
+  color: #ff4d4f;
+}
+
+/* 底部操作栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+}
+
+.action-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}
+
+.back-btn {
+  width: 220rpx;
+  margin-right: 20rpx;
+}
+
+.start-btn {
+  flex: 1;
+}

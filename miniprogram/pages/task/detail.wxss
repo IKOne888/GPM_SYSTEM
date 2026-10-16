@@ -1,0 +1,270 @@
+/* pages/task/detail.wxss */
+
+.page-task-detail {
+  padding: 20rpx 30rpx 160rpx;
+}
+
+/* 头部 */
+.detail-header {
+  margin-bottom: 20rpx;
+}
+
+.detail-title-row {
+  margin-bottom: 20rpx;
+}
+
+.detail-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+/* 审核进度 / 退回意见提示条 */
+.review-tip {
+  background: #fff7e6;
+  border-radius: 10rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.review-tip-error {
+  background: #fff1f0;
+}
+
+.review-tip-text {
+  font-size: 26rpx;
+  color: #873800;
+  line-height: 1.5;
+}
+
+.review-tip-error .review-tip-text {
+  color: #cf1322;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 4rpx;
+}
+
+.meta-value {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 段落 */
+.section {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #1890ff;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* 任务说明 */
+.task-desc {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.task-desc .info-label {
+  margin-bottom: 8rpx;
+}
+
+/* 单行文本省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 信息网格 */
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info-item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16rpx;
+}
+
+.info-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 4rpx;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.text-danger {
+  color: #ff4d4f !important;
+}
+
+.text-success {
+  color: #52c41a !important;
+}
+
+/* 进度条 */
+.detail-progress {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.progress-bar-wrap {
+  flex: 1;
+  height: 16rpx;
+  background: #f0f0f0;
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #1890ff, #36cfc9);
+  border-radius: 8rpx;
+}
+
+.progress-text {
+  color: #1890ff;
+  font-size: 24rpx;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* 视频列表 */
+.video-list {
+  border: 1rpx solid #f0f0f0;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.video-item:last-child {
+  border-bottom: none;
+}
+
+.video-item:active {
+  background: #f5f5f5;
+}
+
+.video-index {
+  width: 48rpx;
+  height: 48rpx;
+  background: #e6f7ff;
+  color: #1890ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.video-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.video-duration {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.video-play-icon {
+  color: #1890ff;
+  font-size: 32rpx;
+  margin-left: 16rpx;
+}
+
+/* 操作栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.action-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}
+
+.action-btn.exam-btn {
+  background: #722ed1;
+}
+
+.action-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.done-icon {
+  font-size: 40rpx;
+  color: #52c41a;
+  margin-right: 10rpx;
+}
+
+.done-text {
+  font-size: 30rpx;
+  color: #52c41a;
+  font-weight: bold;
+}

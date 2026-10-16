@@ -1,0 +1,73 @@
+<!--pages/demand/submit.wxml - 提交培训需求-->
+<view class="page-demand-submit">
+  <!-- 提示条 -->
+  <view class="tip-bar">
+    <text class="tip-text">提交后由培训管理员统一受理，处理结果将通过站内消息通知您</text>
+  </view>
+
+  <!-- 表单 -->
+  <view class="form-card card">
+    <!-- 需求标题 -->
+    <view class="form-item">
+      <text class="form-label">
+        需求标题
+        <text class="required">*</text>
+      </text>
+      <input
+        class="form-input"
+        placeholder="请简要概括您的培训需求"
+        maxlength="100"
+        value="{{form.title}}"
+        bindinput="onTitleInput"
+      />
+      <text class="form-count">{{form.title.length}}/100</text>
+    </view>
+
+    <!-- 需求内容 -->
+    <view class="form-item">
+      <text class="form-label">
+        需求内容
+        <text class="required">*</text>
+      </text>
+      <textarea
+        class="form-textarea"
+        placeholder="请详细描述培训背景、希望解决的问题等"
+        maxlength="1000"
+        value="{{form.content}}"
+        bindinput="onContentInput"
+      />
+      <text class="form-count">{{form.content.length}}/1000</text>
+    </view>
+
+    <!-- 培训主题 -->
+    <view class="form-item">
+      <text class="form-label">培训主题</text>
+      <input
+        class="form-input"
+        placeholder="如：GMP 文件管理规范（选填）"
+        maxlength="100"
+        value="{{form.trainingTopic}}"
+        bindinput="onTopicInput"
+      />
+    </view>
+
+    <!-- 培训对象 -->
+    <view class="form-item">
+      <text class="form-label">培训对象</text>
+      <input
+        class="form-input"
+        placeholder="如：生产部全体人员（选填）"
+        maxlength="200"
+        value="{{form.trainingTarget}}"
+        bindinput="onTargetInput"
+      />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-wrap">
+    <button class="btn-primary submit-btn {{submitting ? 'btn-disabled' : ''}}" bindtap="onSubmit">
+      {{submitting ? '提交中...' : '提交需求'}}
+    </button>
+  </view>
+</view>

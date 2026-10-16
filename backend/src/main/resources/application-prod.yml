@@ -1,0 +1,54 @@
+# =====================================================
+# 生产环境配置
+# 安全要求：所有敏感信息（数据库密码/Redis密码/MinIO密钥/会话密钥）
+# 必须在部署环境通过环境变量注入，本文件不允许出现任何明文密码
+# 必设环境变量：DB_USERNAME DB_PASSWORD REDIS_PASSWORD
+#               MINIO_ACCESS_KEY MINIO_SECRET_KEY SA_TOKEN_JWT_SECRET
+# =====================================================
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 生产数据库地址通过环境变量注入，禁止硬编码
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    # Hikari 连接池生产配置
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT:6379}
+    # 生产环境 Redis 必须有密码
+    password: ${REDIS_PASSWORD}
+    database: ${REDIS_DATABASE:0}
+    timeout: 5000
+  servlet:
+    multipart:
+      max-file-size: ${MULTIPART_MAX_FILE_SIZE:200MB}
+      max-request-size: ${MULTIPART_MAX_REQUEST_SIZE:200MB}
+
+# 生产环境不打印 SQL（防止参数值泄露，审计日志另有独立方案）
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+# MinIO 文件存储（生产密钥必须由环境变量注入）
+minio:
+  endpoint: ${MINIO_ENDPOINT}
+  access-key: ${MINIO_ACCESS_KEY}
+  secret-key: ${MINIO_SECRET_KEY}
+  bucket-name: ${MINIO_BUCKET:gmp-training}
+
+# 生产环境关闭接口文档（如需开放，通过环境变量 KNIFE4J_ENABLE=true 开启并加鉴权）
+knife4j:
+  enable: ${KNIFE4J_ENABLE:false}
+
+logging:
+  level:
+    # 生产环境业务日志级别 info，避免 debug 输出敏感信息
+    com.gmp: info

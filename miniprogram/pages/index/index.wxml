@@ -1,0 +1,119 @@
+<!--pages/index/index.wxml - 首页（我的任务）-->
+<view class="page-index">
+  <!-- 顶部统计区域 -->
+  <view class="stats-header">
+    <!-- 问候语 + 消息铃铛 -->
+    <view class="stats-title">
+      <text class="welcome-text">你好，{{userInfo.realName || userInfo.username || '员工'}}</text>
+      <view class="message-icon" bindtap="onMessageTap">
+        <text class="iconfont">✉</text>
+        <!-- 未读角标 -->
+        <text class="badge" wx:if="{{unreadCount > 0}}">{{unreadCount > 99 ? '99+' : unreadCount}}</text>
+      </view>
+    </view>
+
+    <!-- 统计卡片 -->
+    <view class="stats-cards">
+      <view class="stat-item">
+        <text class="stat-num">{{stats.notStarted}}</text>
+        <text class="stat-label">待学习</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{stats.studying}}</text>
+        <text class="stat-label">学习中</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{stats.waitingExam}}</text>
+        <text class="stat-label">待考试</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{stats.completed}}</text>
+        <text class="stat-label">已完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="filter-bar">
+    <view
+      wx:for="{{statusOptions}}"
+      wx:key="value"
+      class="filter-item {{statusFilter === item.value ? 'active' : ''}}"
+      data-value="{{item.value}}"
+      bindtap="onFilterTap"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <!-- 任务列表 -->
+  <view class="task-list container">
+    <block wx:if="{{taskList.length > 0}}">
+      <view
+        wx:for="{{taskList}}"
+        wx:key="id"
+        class="task-card card"
+        data-id="{{item.id}}"
+        bindtap="onTaskTap"
+      >
+        <!-- 卡片头部：任务名 + 状态标签 -->
+        <view class="task-card-header flex-between">
+          <text class="task-name ellipsis">{{item.name || item.courseName || '培训课程'}}</text>
+          <text class="tag {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+
+        <!-- 卡片主体 -->
+        <view class="task-card-body">
+          <view class="task-info-row" wx:if="{{item.courseName}}">
+            <text class="info-label">培训课程：</text>
+            <text class="info-value">{{item.courseName}}</text>
+          </view>
+          <view class="task-info-row" wx:if="{{item.planName}}">
+            <text class="info-label">所属计划：</text>
+            <text class="info-value ellipsis">{{item.planName}}</text>
+          </view>
+          <view class="task-info-row" wx:if="{{item.deadlineText}}">
+            <text class="info-label">截止时间：</text>
+            <text class="info-value {{item.status === 'overdue' ? 'text-danger' : ''}}">{{item.deadlineText}}</text>
+          </view>
+          <!-- 学习进度条 -->
+          <view class="task-progress-row" wx:if="{{item.status === 'studying' || item.status === 'waiting_exam'}}">
+            <view class="progress-bar-wrap">
+              <view class="progress-bar" style="width: {{item.progressPercent}}%"></view>
+            </view>
+            <text class="progress-text">{{item.progressPercent}}%</text>
+          </view>
+          <!-- 考试成绩 -->
+          <view class="task-info-row" wx:if="{{item.examScore !== null && item.examScore !== undefined}}">
+            <text class="info-label">考试成绩：</text>
+            <text class="info-value {{item.examPass === 1 ? 'text-success' : 'text-danger'}}">{{item.examScore}}分 {{item.examPass === 1 ? '(已通过)' : '(未通过)'}}</text>
+          </view>
+        </view>
+
+        <!-- 卡片底部：操作提示 -->
+        <view class="task-card-footer flex-between">
+          <text class="task-action-hint">点击查看详情</text>
+          <view class="task-action-btn" wx:if="{{item.status === 'not_started' || item.status === 'studying'}}">
+            去学习
+          </view>
+          <view class="task-action-btn exam-btn" wx:if="{{item.status === 'waiting_exam'}}">
+            去考试
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && taskList.length === 0}}">
+      <text class="empty-text">暂无培训任务</text>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{!hasMore && taskList.length > 0}}">
+      <text class="loading-text">没有更多了</text>
+    </view>
+  </view>
+</view>

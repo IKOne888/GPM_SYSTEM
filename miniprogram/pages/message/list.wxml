@@ -1,0 +1,46 @@
+<!--pages/message/list.wxml - 消息中心-->
+<view class="page-message">
+  <!-- 筛选 + 全部已读 -->
+  <view class="msg-toolbar">
+    <view class="msg-filter">
+      <view class="filter-item {{readFilter === '' ? 'active' : ''}}" data-value="" bindtap="onFilterTap">全部</view>
+      <view class="filter-item {{readFilter === '0' ? 'active' : ''}}" data-value="0" bindtap="onFilterTap">未读</view>
+      <view class="filter-item {{readFilter === '1' ? 'active' : ''}}" data-value="1" bindtap="onFilterTap">已读</view>
+    </view>
+    <text class="read-all" bindtap="onReadAll">全部已读</text>
+  </view>
+
+  <!-- 消息列表 -->
+  <view class="msg-list container">
+    <block wx:if="{{messageList.length > 0}}">
+      <view
+        wx:for="{{messageList}}"
+        wx:key="id"
+        class="msg-card card {{item.isRead === 0 ? 'msg-unread' : ''}}"
+        data-index="{{index}}"
+        bindtap="onMessageTap"
+      >
+        <view class="msg-head flex-between">
+          <view class="msg-type-wrap">
+            <text class="msg-type">{{item.typeText}}</text>
+            <text class="msg-dot" wx:if="{{item.isRead === 0}}"></text>
+          </view>
+          <text class="msg-time">{{item.createTimeText}}</text>
+        </view>
+        <text class="msg-title">{{item.title}}</text>
+        <text class="msg-content ellipsis-2">{{item.content}}</text>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && messageList.length === 0}}">
+      <text class="empty-text">暂无消息</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view class="loading-wrap" wx:if="{{!hasMore && messageList.length > 0}}">
+      <text class="loading-text">没有更多了</text>
+    </view>
+  </view>
+</view>
